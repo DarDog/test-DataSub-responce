@@ -13,12 +13,12 @@ const connection = mysql.createConnection({
 connection.connect();
 
 connection.query(
-  "SELECT Student.FirstName, Student.LastName, " +
-  "COUNT(Student.StudentId) as count" +
-  "From Student INNER JOIN Exams" +
-  "ON Student.StudentId = Exams.StudentId" +
+  "SELECT Students.FirstName, Students.LastName, " +
+  "COUNT(Students.StudentId) as count" +
+  "From Students INNER JOIN Exams" +
+  "ON Students.StudentId = Exams.StudentId" +
   "WHERE Exams.Result < 3" +
-  "GROUP BY Student.StudentId HAVING count > 2",
+  "GROUP BY Students.StudentId HAVING count > 2",
   (err, result) => {
     console.log(err);
     console.log(result);
@@ -26,11 +26,11 @@ connection.query(
 )
 
 connection.query(
-  "SELECT Student.Group, " +
-  "COUNT(Student.StudentId) as count" +
-  "FROM Student JOIN Exam ON Student.StudentId = Exams.StudentId" +
-  "WHERE Exams.Result <3" +
-  "GROUP BY Student.Group HAVING COUNT(Student.StudentId) > 10",
+  "SELECT Students.Group, " +
+  "COUNT(Students.StudentId) as count" +
+  "FROM Students JOIN Exam ON Students.StudentId = Exams.StudentId" +
+  "WHERE Exams.Result < 3" +
+  "GROUP BY Students.Group HAVING COUNT(Student.StudentId) > 10",
   (err, result) => {
     console.log(err);
     console.log(result);
